@@ -1,0 +1,29 @@
+<form  [formGroup]="FormGroup" >
+  <div class="container">
+    <div class="row">
+      <div formArrayName="itemRows" >
+        <h3>Enter Name</h3>
+        <ng-container  *ngIf="itemRows != null" >
+          <div *ngFor="let item of itemRows.controls;let i=index" [formGroupName]="i">
+            <div class="form-group row">
+              <input type="text" class="form-control" placeholder="Enter Name" formControlName="Name"/>
+              <span  *ngIf="itemRows.value.length>1"> <button class="btn btn-danger" (click)="deleteRow(i)">X</button>
+              </span>
+            </div>
+          </div>
+          </ng-container>
+          <button type="button" (click)="addNewRow()"  class="btn btn-primary">Add more Row</button>
+
+      </div>
+
+    </div>
+  </div>
+</form>
+<h2> Result</h2>
+<div *ngFor="let i of list">{{i | json}}
+  <h2></h2>
+
+</div>
+<app-add [data]=list></app-add>
+
+<router-outlet></router-outlet>
